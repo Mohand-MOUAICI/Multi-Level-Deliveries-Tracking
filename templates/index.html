@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Package Tracker</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <style>
+        .active {
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4">Package Status:</h1>
+        <div class="input-group mb-3">
+            <input id="packageId" type="text" class="form-control" placeholder="Enter package ID">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" onclick="trackPackage()">Track</button>
+            </div>
+        </div>
+        <div id="packageStatus" class="alert alert-info">Unknown</div>
+        <div class="row mt-4">
+            <div id="Factory" class="col location text-center">
+                <i class="fas fa-industry fa-3x"></i> 
+                <p>Factory</p>
+            </div>
+            <div id="Warehouse1" class="col location text-center">
+                <i class="fas fa-warehouse fa-3x"></i> 
+                <p>Warehouse 1</p>
+            </div>
+            <div id="Ontheway1" class="col location text-center">
+                <i class="fas fa-truck fa-3x"></i> 
+                <p>On the Way</p>
+            </div>
+            <div id="Warehouse2" class="col location text-center">
+                <i class="fas fa-warehouse fa-3x"></i> 
+                <p>Warehouse 2</p>
+            </div>
+            <div id="Ontheway2" class="col location text-center">
+                <i class="fas fa-truck-moving fa-3x"></i> 
+                <p>On the Way</p>
+            </div>
+            <div id="Customer" class="col location text-center">
+                <i class="fas fa-home fa-3x"></i> 
+                <p>Customer</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let intervalId;
+    
+        function trackPackage() {
+            if (intervalId) {
+                clearInterval(intervalId);
+            }
+    
+            const packageId = document.getElementById('packageId').value;
+            intervalId = setInterval(function() {
+                fetch(`/get_package_status/${packageId}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('packageStatus').innerText = data.attributes.status;
+                    const location = data.attributes.location.replace(/\s+/g, '');
+                    document.querySelectorAll('.location').forEach(el => el.classList.remove('active'));
+                    if (location.startsWith('Ontheway')) {
+                        document.getElementById(location).classList.add('active');
+                    } else {
+                        document.getElementById(location).classList.add('active');
+                    }
+                });
+            }, 1000); // mettre à jour chaque seconde
+        }
+    </script>
+    
+    
+</body>
+</html>
+

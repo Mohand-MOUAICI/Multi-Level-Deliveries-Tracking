@@ -10,7 +10,7 @@ This script uses the requests library to simulate package movement by periodical
 colis_entrepot_livreur.py :
 This script uses the requests library to create or update "things" in the Eclipse Ditto system, such as packages, warehouses, and delivery people. It sets up initial data for a package, two warehouses, and a delivery person.
 
-Web Frontend
+# Web Frontend
 app.py :
 This script sets up a Flask web server that serves the frontend and provides an API for fetching the current status of a package.
 

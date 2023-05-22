@@ -4,17 +4,17 @@ This system is designed to simulate and track the movement of a package through 
 
 # Components
 Python Scripts
-simulate_movement.py
+simulate_movement.py :
 This script uses the requests library to simulate package movement by periodically updating the location and status of a package in the Eclipse Ditto system. The package moves through the following locations: Factory, Warehouse 1, On the way to Warehouse 2, Warehouse 2, On the way to the customer, and finally to the customer.
 
-colis_entrepot_livreur.py
+colis_entrepot_livreur.py :
 This script uses the requests library to create or update "things" in the Eclipse Ditto system, such as packages, warehouses, and delivery people. It sets up initial data for a package, two warehouses, and a delivery person.
 
 Web Frontend
-app.py
+app.py :
 This script sets up a Flask web server that serves the frontend and provides an API for fetching the current status of a package.
 
-index.html
+index.html :
 The frontend is a simple HTML page that allows the user to enter a package ID and see the current status of that package. It updates the status every second to give a real-time tracking experience.
 
 # Setup and Running
